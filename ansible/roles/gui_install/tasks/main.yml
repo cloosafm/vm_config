@@ -1,0 +1,23 @@
+---
+# tasks file for gui_install
+
+- name: Ensure we have reached the gui_install tasks
+  debug:
+    msg: "Starting gui_install tasks"
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: Install core GNOME desktop (gnome-core)
+  apt:
+    name: "{{ gnome_core_package }}"
+    state: present
+  become: yes
+
+- name: Install GNOME Tweaks
+  apt:
+    name: "{{ gnome_tweaks_package }}"
+    state: present
+  become: yes

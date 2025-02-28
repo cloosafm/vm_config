@@ -1,0 +1,50 @@
+---
+# tasks file for remove_snap
+
+- name: Ensure we have reached the remove_snap tasks
+  debug:
+    msg: "Starting remove_snap tasks"
+
+- name: Remove Snapd (Snap package manager)
+  apt:
+    name: snapd
+    state: absent
+    purge: yes
+  become: yes
+
+- name: Check if Snap is installed
+  command: snap list
+  register: snap_packages
+  failed_when: false  # Don't fail if snap is not installed
+  changed_when: false
+  become: yes
+
+- name: Remove installed snap packages
+  apt:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ snap_packages.stdout_lines }}"
+  when: snap_packages.stdout_lines | length > 0
+  become: yes
+
+- name: Collect service facts
+  ansible.builtin.service_facts:
+
+- name: Stop and disable Snapd service if it exists
+  systemd:
+    name: snapd
+    state: stopped
+    enabled: no
+  when: "'snapd' in ansible_facts.services"
+  become: yes
+
+- name: Remove snap-related directories
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/var/cache/snapd"
+    - "/var/snap"
+    - "/snap"
+    - "/var/lib/snapd"
+  become: yes

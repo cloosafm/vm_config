@@ -1,0 +1,32 @@
+---
+# tasks file for apt_basics
+- name: Ensure we have reached the apt_basics tasks
+  debug:
+    msg: "Starting apt_basics tasks"
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Install required dependencies for apps
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - wget
+      - vim
+      - tmux
+      - man-db
+      - net-tools
+      - lsb-release
+      - adwaita-icon-theme
+      - build-essential
+      - dkms
+      - linux-headers-generic
+    state: present
+
+- name: Create Keyring
+  command: install -m 0755 -d /etc/apt/keyrings

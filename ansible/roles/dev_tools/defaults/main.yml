@@ -1,0 +1,13 @@
+---
+# defaults file for dev_tools
+
+# VS Code version
+vscode_version: "stable"
+
+# List of packages to install
+apt_packages:
+  - binutils
+  - cmake
+
+# Python and pip configuration
+python_version: "3" 

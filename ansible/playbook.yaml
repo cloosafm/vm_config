@@ -1,0 +1,12 @@
+- name: Install and configure a VM with appropriate roles
+  hosts: all
+  become: yes
+  roles:
+    - apt_basics
+    - remove_snap
+    - security_tools
+    - gui_install
+    - web_tools
+    - dev_tools
+    - docker_install
+    - reload_vm

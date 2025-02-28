@@ -1,0 +1,10 @@
+---
+# tasks file for reload_vm
+
+- name: Reboot the VM to apply changes and load graphical interface
+  reboot:
+    reboot_timeout: 600  # Waits up to 10 minutes for the reboot to complete
+    test_command: whoami  # Command to test if the VM is up after reboot
+  become: yes
+  tags:
+    - reboot

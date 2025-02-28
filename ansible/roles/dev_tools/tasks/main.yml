@@ -1,0 +1,44 @@
+---
+# tasks file for dev_tools
+
+- name: Ensure we have reached the dev_tools tasks
+  debug:
+    msg: "Starting dev_tools tasks"
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: Install necessary packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ apt_packages }}"
+  become: yes
+
+- name: Install Python ({{ python_version }})
+  apt:
+    name: "python{{ python_version }}"
+    state: present
+  become: yes
+
+- name: Install Python pip for version {{ python_version }}
+  apt:
+    name: "python{{ python_version }}-pip"
+    state: present
+  become: yes
+
+- name: Ensure VSCode dependencies are installed
+  apt:
+    name: xdg-utils
+    state: present
+  become: yes
+
+- name: Install VS Code
+  shell: >
+    curl -sSL https://go.microsoft.com/fwlink/?LinkID=760868 -o /tmp/vscode.deb &&
+    dpkg -i /tmp/vscode.deb &&
+    apt-get install -f
+  become: yes
+  when: vscode_version == "stable"

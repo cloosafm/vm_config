@@ -1,0 +1,56 @@
+---
+# tasks file for security_tools
+
+
+- name: Ensure we have reached the security_tools tasks
+  debug:
+    msg: "Starting security_tools tasks"
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: Install git, ufw, and openssh-server
+  apt:
+    name:
+      - git
+      - ufw
+      - openssh-server
+      - gnupg
+      - gnupg2
+    state: present
+  become: yes
+
+- name: Ensure UFW is enabled
+  ufw:
+    state: enabled
+    policy: deny
+    logging: on
+  become: yes
+
+- name: Allow OpenSSH through UFW
+  ufw:
+    rule: allow
+    name: OpenSSH
+  become: yes
+
+- name: Check if SSH key exists
+  stat:
+    path: "{{ ssh_key_path }}"
+  register: ssh_key_stat
+
+- name: Generate SSH key if not already present
+  user:
+    name: "{{ ansible_user }}"
+    state: present
+  become: yes
+  when: ssh_key_stat.stat.exists == False
+
+- name: Generate Ed25519 SSH key pair
+  openssh_keypair:
+    path: "{{ ssh_key_path }}"
+    type: "{{ ssh_key_type }}"
+    passphrase: "{{ ssh_key_passphrase }}"
+  become: yes
+  when: ssh_key_stat.stat.exists == False

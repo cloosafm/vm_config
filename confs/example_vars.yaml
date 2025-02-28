@@ -1,0 +1,12 @@
+# Variables for VagrantFile
+box_name: <box_name>
+host_name: <hostname>
+vm_provider: virtualbox # works with version : 7.0.24 r167081 (Qt5.15.3)
+vm_box: bento/ubuntu-22.04
+vm_path: <full/path/to/files>
+vm_mem: 2048
+vm_cpu_count: 2
+vm_time_out: 600
+vm_gui: true
+shell_script: <path/to/script> # remember to add it to the  vars in Vagrantfile
+guest_add: /path/to/VBoxGuestAdditions.iso

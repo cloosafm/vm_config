@@ -1,0 +1,7 @@
+---
+# defaults file for security_tools
+
+# SSH key options
+ssh_key_path: "~/.ssh/id_ed25519"
+ssh_key_type: "ed25519"
+ssh_key_passphrase: ""  # Empty string means no passphrase

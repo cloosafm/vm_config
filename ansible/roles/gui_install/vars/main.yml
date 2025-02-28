@@ -1,0 +1,5 @@
+---
+# vars file for gui_install
+
+gnome_core_package: gnome-core
+gnome_tweaks_package: gnome-tweaks

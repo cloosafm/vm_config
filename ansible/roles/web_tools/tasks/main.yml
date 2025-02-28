@@ -1,0 +1,19 @@
+---
+# tasks file for web_tools
+
+- name: Ensure we have reached the web_tools tasks
+  debug:
+    msg: "Starting web_tools tasks"
+
+
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: Install Firefox from APT repository
+  apt:
+    name: firefox
+    state: present
+  become: yes
