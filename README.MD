@@ -11,6 +11,9 @@ Prerequisite:
 Rename the confs/example_vars.yaml file as confs/vars.yaml and customize the values.
 Then just do ```vagrant up``` and let the configuration run its full course (including reloading the VM) before using the VM.
 
+In order to use VirtualBox Guest Additions, make sure the plugin is installed :
+```vagrant plugin install vagrant-vbguest```
+
 Maybe all you want is a basic Vagrantfile with variables? Then comment out the ansible block.
 Also if you prefer using a simple shell script instead of a full Ansible configuration, uncomment the appropriate line.
 
