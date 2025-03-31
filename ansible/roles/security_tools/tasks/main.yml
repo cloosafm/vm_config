@@ -37,11 +37,11 @@
 
 - name: Ensure .ssh directory exists
   file:
-    path: "vagrant/.ssh"
+    path: "/home/vagrant/.ssh"
     state: directory
     mode: '0700'
 
 - name: Create ssh key
-  command: ssh-keygen -t rsa -b 4096 -N "" -f vagrant/.ssh/id_rsa
+  command: ssh-keygen -t rsa -b 4096 -N "" -f /home/vagrant/.ssh/id_rsa
   args:
-    creates: "vagrant/.ssh/id_rsa"
+    creates: "/home/vagrant/.ssh/id_rsa"
