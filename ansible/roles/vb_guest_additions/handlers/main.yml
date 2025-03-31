@@ -1,0 +1,8 @@
+---
+# handlers file for vb_guest_additions
+
+- name: Restart VirtualBox Guest Additions
+  service:
+    name: vboxadd
+    state: restarted
+  when: ansible_service_mgr == 'systemd'

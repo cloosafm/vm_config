@@ -1,0 +1,22 @@
+---
+# tasks file for vb_guest_additions
+
+- name: Install dependencies for VirtualBox Guest Additions
+  apt:
+    name:
+      - build-essential
+      - dkms
+      - linux-headers-generic
+    state: present
+
+- name: Ensure VBoxClient is running for clipboard functionality
+  systemd:
+    name: vboxadd-service
+    enabled: yes
+    state: started
+
+- name: Enable clipboard service at startup
+  lineinfile:
+    path: /etc/xdg/autostart/vboxclient.desktop
+    line: 'Exec=VBoxClient --clipboard'
+    create: yes

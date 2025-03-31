@@ -25,7 +25,7 @@ vm_time_out = config['vm_time_out']
 
 vm_gui = config['vm_gui']
 vm_path = config['vm_path']
-guest_add = config['guest_add']
+guest_add_path = config['guest_add_path']
 
 #############################################
 
@@ -35,15 +35,19 @@ Vagrant.configure("2") do |config|
   config.vm.define box_name do |my_vm|
     my_vm.vm.box = vm_box
     my_vm.vm.hostname = host_name
+    my_vm.vbguest.auto_update = true
+    config.vm.synced_folder "/usr/share/virtualbox/", "/vagrant/guest_additions"
+
     # if you prefer script provisioning, use below line and comment out the Ansible provisioning block
-    # my_vm.vm.provision "shell", privileged: true, path: <path/to/script>  # of course, the path can be a variable
+    # my_vm.vm.provision "shell", privileged: true, path: <path/to/script>  # of course, the path can be a variable added to your vars.yam;
 
     # Ansible provisioning block
     my_vm.vm.provision "ansible" do |ansible|
         ansible.playbook = "ansible/playbook.yaml"  # Path to the playbook you want to run
         ansible.config_file = "ansible/ansible.cfg"  # Optional: Specify if using a custom Ansible config file
         ansible.extra_vars = {
-          "ansible_roles_path" => "./ansible/roles"  # Path to the roles directory
+          "ansible_roles_path" => "./ansible/roles",  # Path to the roles directory
+          "guest_add_path" => guest_add_path  # Pass the guest_add_path variable to Ansible
         }
       end
 
@@ -55,8 +59,6 @@ Vagrant.configure("2") do |config|
       vb.customize ["setproperty", "machinefolder", vm_path]
       vb.memory = vm_mem
       vb.cpus = vm_cpu_count
-      vb.customize ["modifyvm", :id, "--usb", "on"]
-      vb.customize ["modifyvm", :id, "--usbehci", "on"]
     end
   end
   

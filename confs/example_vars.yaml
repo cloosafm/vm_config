@@ -8,5 +8,5 @@ vm_mem: 2048
 vm_cpu_count: 2
 vm_time_out: 600
 vm_gui: true
-shell_script: <path/to/script> # remember to add it to the  vars in Vagrantfile
-guest_add: /path/to/VBoxGuestAdditions.iso
+shell_script: <path/to/script> # remember to add it to the vars in Vagrantfile
+guest_add_path: /path/to/VBoxGuestAdditions.iso

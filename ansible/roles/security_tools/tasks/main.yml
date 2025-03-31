@@ -35,22 +35,13 @@
     name: OpenSSH
   become: yes
 
-- name: Check if SSH key exists
-  stat:
-    path: "{{ ssh_key_path }}"
-  register: ssh_key_stat
+- name: Ensure .ssh directory exists
+  file:
+    path: "vagrant/.ssh"
+    state: directory
+    mode: '0700'
 
-- name: Generate SSH key if not already present
-  user:
-    name: "{{ ansible_user }}"
-    state: present
-  become: yes
-  when: ssh_key_stat.stat.exists == False
-
-- name: Generate Ed25519 SSH key pair
-  openssh_keypair:
-    path: "{{ ssh_key_path }}"
-    type: "{{ ssh_key_type }}"
-    passphrase: "{{ ssh_key_passphrase }}"
-  become: yes
-  when: ssh_key_stat.stat.exists == False
+- name: Create ssh key
+  command: ssh-keygen -t rsa -b 4096 -N "" -f vagrant/.ssh/id_rsa
+  args:
+    creates: "vagrant/.ssh/id_rsa"
