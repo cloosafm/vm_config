@@ -1,1 +1,3 @@
 vars.yaml
+.vagrant
+.DS_Store

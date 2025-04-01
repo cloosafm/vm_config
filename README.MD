@@ -37,3 +37,6 @@ If the provided roles are not sufficient, you can create your own :
 
 In the provided ansible.cfg, the roles are defined to be in the same directory as the cfg file.
 
+## Additional information
+
+This was tested on Ubuntu. On a different OS, you may need to modify certain paths, such as the local one for "config.vm.synced_folder" - for instance on Mac, it might be "/Applications/VirtualBox.app/Contents/MacOS"
