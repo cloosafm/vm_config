@@ -10,6 +10,13 @@
     update_cache: yes
   become: yes
 
+- name: Install theme for icons
+  apt:
+    name:
+      - adwaita-icon-theme
+    state: present
+  become: yes
+
 - name: Install core GNOME desktop (gnome-core)
   apt:
     name: "{{ gnome_core_package }}"

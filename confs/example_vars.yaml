@@ -10,3 +10,6 @@ vm_time_out: 600
 vm_gui: true
 shell_script: <path/to/script> # remember to add it to the vars in Vagrantfile
 guest_add_path: /path/to/VBoxGuestAdditions.iso # default is : /vagrant/guest_additions/VBoxGuestAdditions.iso
+
+# By default, you'll end up with about 30GB of disk space. This is enough for the vast majority of our projects.
+# Username/password are the default for vagrant conf.

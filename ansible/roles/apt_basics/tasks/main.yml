@@ -22,7 +22,6 @@
       - man-db
       - net-tools
       - lsb-release
-      - adwaita-icon-theme
       - build-essential
       - dkms
       - linux-headers-generic

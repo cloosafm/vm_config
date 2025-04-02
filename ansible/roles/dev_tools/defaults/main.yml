@@ -7,7 +7,9 @@ vscode_version: "stable"
 # List of packages to install
 apt_packages:
   - binutils
+  - make
   - cmake
+  - git
 
 # Python and pip configuration
 python_version: "3" 

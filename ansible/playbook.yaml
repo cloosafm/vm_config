@@ -9,4 +9,5 @@
     - web_tools
     - dev_tools
     - docker_install
+    - vb_guest_additions
     - reload_vm
