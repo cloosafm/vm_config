@@ -66,6 +66,7 @@ In the provided ansible.cfg, the roles are defined to be in the same directory a
 This was tested on Ubuntu. On a different OS, you may need to modify certain paths, such as the local one for "config.vm.synced_folder" - for instance on Mac, it might be "/Applications/VirtualBox.app/Contents/MacOS"
 
 ## Future development
-- The cursor shows as a white square. Adding a specific icon theme did not help. Will also try with another GUI.
+- The cursor shows as a white square when not on over a window. Adding a specific icon theme did not help. Will also try with another GUI.
 - Although Ansible fact gathering is turned on, some facts/variables seem to not be collected.
+- Will add gdb to dev tools
 - Overall (and over time), this project will benefit from a better understanding of ansible-galaxy possibilities.
